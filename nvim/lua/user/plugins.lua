@@ -46,6 +46,10 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "github/copilot.vim"
   use "akinsho/toggleterm.nvim"
+  use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'nvim-tree/nvim-web-devicons'}
+  }
   use "lukas-reineke/indent-blankline.nvim"
   use {
           "windwp/nvim-autopairs",  --useful auto pair 
