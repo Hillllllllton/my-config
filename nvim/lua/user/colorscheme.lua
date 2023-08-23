@@ -1,6 +1,8 @@
-local colorscheme = "tokyonight"
-
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-if not status_ok then
-  return
-end
+-- local colorscheme = "tokyonight"
+--
+-- local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+-- if not status_ok then
+--   return
+-- end
+--Lua:
+vim.cmd[[colorscheme nord]]

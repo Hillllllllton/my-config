@@ -2,6 +2,11 @@ local status_ok, bufferline = pcall(require, "bufferline")
 if not status_ok then
   return
 end
+-- local highlights = require("nord").bufferline.highlights({
+--     italic = true,
+--     bold = true,
+-- })
+
 bufferline.setup {
         options = {
             mode = "buffers", -- set to "tabs" to only show tabpages instead
@@ -43,9 +48,10 @@ bufferline.setup {
                     filetype = "NvimTree",
                     text = "File Explorer",
                     text_align = "left" ,
-                    separator = true,
+                    separator = "thin",
                 }
             },
+            highlights = highlights,
             color_icons = true , -- whether or not to add the filetype icon highlights
             get_element_icon = function(element)
               -- element consists of {filetype: string, path: string, extension: string, directory: string}
