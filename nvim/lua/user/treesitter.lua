@@ -4,9 +4,9 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = { "lua", "vim", "json", "javascript", "python" },
+  ensure_installed = { "lua", "vim", "json", "javascript", "python", "html" },
   sync_install = false,
-  ignore_install = {""},   --list of language which want to ignore_install
+  ignore_install = {"c"},   --list of language which want to ignore_install
 
   auto_install = false,   --recommended false 
 

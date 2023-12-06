@@ -7,6 +7,8 @@ local servers = {
 	"bashls",
 	"jsonls",
 	"yamlls",
+  "clangd",
+  "java-language-server"
 }
 
 local mason = require("mason")

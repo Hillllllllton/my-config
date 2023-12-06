@@ -44,7 +44,6 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
-keymap("i", "kj", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -55,6 +54,9 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
+
+-- press jk fast to enter  
+keymap("v", "jk", "<ESC>", opts)
 
 -- Visual Block --
 -- Move text up and down
@@ -76,3 +78,8 @@ keymap("n", "<leader>t", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>b", "<cmd>Telescope buffers<cr>", opts)
 
 keymap("n", "<leader>e", ":NvimTreeFindFileToggle<cr>", opts)
+
+keymap("n", "<leader>gg", ":LazyGit<cr>", opts)
+keymap("n", "<leader>tl", ":Telescope lazygit<cr>", opts)
+
+
