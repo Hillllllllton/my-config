@@ -102,7 +102,7 @@ whichkey.register({
     l = { "<cmd>BufferLineCloseLeft<cr>", "Close Left" },
     o = { "<cmd>BufferLineCloseOther<cr>", "Close Other" },
     d = { "<cmd>:bd<cr>", "Delete Buffer" },
-
+    w = { "<cmd>:bw<cr>", "Forced Wipeout Buffer" },
   },
   t = {
     name = "Terminal",

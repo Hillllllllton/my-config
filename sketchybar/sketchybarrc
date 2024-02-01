@@ -4,6 +4,8 @@
 # https://github.com/FelixKratz/dotfiles
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
+source "$CONFIG_DIR/colors.sh"
+
 
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar, these are only some of the
@@ -17,7 +19,6 @@ sketchybar --bar height=40        \
                  color=0x00000000 \
                  border_color=0xffd08770 \
                  sticky=on       \
-                 margin=10       \
                  y_offset=4     \
                  padding_left=25  \
                  padding_right=25 
@@ -28,12 +29,14 @@ sketchybar --bar height=40        \
 # https://felixkratz.github.io/SketchyBar/config/items
 
 sketchybar --default icon.font="Hack Nerd Font:Bold:17.0"  \
-                     icon.color=0xffffffff                 \
+                     icon.color=$Lime_Blue                 \
                      label.font="Hack Nerd Font:Bold:14.0" \
-                     label.color=0xffECEFF4                \
+                     label.color=$Lime_Blue                \
                      padding_left=5                        \
                      padding_right=5                       \
                      label.padding_left=4                  \
+                     background.height=35                  \
+                     background.corner_radius=10            \
                      label.padding_right=4                 \
                      icon.padding_left=4                   \
                      icon.padding_right=4
@@ -43,47 +46,46 @@ sketchybar --default icon.font="Hack Nerd Font:Bold:17.0"  \
 # https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 # to indicate active and available mission control spaces
 brackets=(
-  background.color=0xff4C566A
+  background.color=$Night
   background.height=35
   background.corner_radius=10
-  background.border_color=0xff8FBCBB
-  background.border_width=5
+  background.border_color=$Light_Green
+  background.border_width=3
 
 )
 
-SPACE_ICONS=("" "" "󰙯" "󰓓" "󰀶" "6" "7" "8" "9" "10")
+SPACE_SIDS=(1 2 3 4 5 6 7 8 9 10)
 
-for i in "${!SPACE_ICONS[@]}"
+for sid in "${SPACE_SIDS[@]}"
 do
-  sid=$(($i+1))
   sketchybar --add space space.$sid left                                 \
-             --set space.$sid associated_space=$sid                      \
-                              icon=${SPACE_ICONS[i]}                     \
-                              icon.padding_left=5                       \
-                              icon.padding_right=5                      \
-                              background.border_color=0xff8FBCBB         \
-                              background.corner_radius=5                 \
-                              background.border_width=5                  \
-                              background.height=20                       \
-                              label.drawing=off                          \
-                              script="$PLUGIN_DIR/space.sh"              \
-                              click_script="yabai -m space --focus $sid"
+             --set space.$sid space=$sid                                 \
+                              icon=$sid                                  \
+                              label.font="sketchybar-app-font:Regular:16.0" \
+                              label.padding_right=20                     \
+                              label.y_offset=-1                          \
+                              script="$PLUGIN_DIR/space.sh"              
 done
 
+sketchybar --add item space_separator left                             \
+           --set space_separator icon="􀆊"                                \
+                                 icon.color=$Ocean_Blue \
+                                 icon.padding_left=4                   \
+                                 label.drawing=off                     \
+                                 background.drawing=off                \
+                                 script="$PLUGIN_DIR/space_windows.sh" \
+           --subscribe space_separator space_windows_change      
+sketchybar --add item front_app left \
+           --set front_app       background.color=$Transparent \
+                                 icon.color=$Lime_Blue \
+                                 icon.font="sketchybar-app-font:Regular:16.0" \
+                                 label.color=$Lime_Blue \
+                                 script="$PLUGIN_DIR/front_app.sh"            \
+           --subscribe front_app front_app_switched
 ##### Adding Left Items #####
 # We add some regular items to the left side of the bar
 # only the properties deviating from the current defaults need to be set
 
-sketchybar --add item space_separator left                         \
-           --set space_separator icon=                            \
-                                 padding_left=10                   \
-                                 padding_right=10                  \
-                                 label.drawing=off                 \
-                                                                   \
-           --add item front_app left                               \
-           --set front_app       script="$PLUGIN_DIR/front_app.sh" \
-                                 icon.drawing=off                  \
-           --subscribe front_app front_app_switched
 
 sketchybar --add bracket left_menu space_separator front_app \
            --set left_menu "${brackets[@]}"                  \
@@ -148,16 +150,16 @@ sketchybar --add bracket input_bracket input mic \
 sketchybar --add bracket status wifi volume battery \
            --set status "${brackets[@]}"             
 ##### Adding Center Items #####
-media=(
-  script="$PLUGIN_DIR/media.sh"
-  updates=on
-)
-
-sketchybar --add item media left \
-           --set media "${media[@]}" \
+sketchybar --add item media right \
+           --set media label.color=$Light_Green \
+                       label.max_chars=20 \
+                       icon.padding_left=0 \
+                       scroll_texts=on \
+                       icon=􀑪             \
+                       icon.color=$Lime_Blue   \
+                       background.drawing=off \
+                       script="$PLUGIN_DIR/media.sh" \
            --subscribe media media_change
-
-
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration to
 # force all scripts to run the first time, it should never be run in an item script.
