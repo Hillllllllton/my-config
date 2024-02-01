@@ -1,6 +1,6 @@
 # Initially set previous_resolution to nothing
 previous_resolution=""
-desired_resolution="3840 x 2160"    # Change this to your desired resolution
+external_resolution="3024 x 1964"    # Change this to your external monitor resolution
 
 while true; do
     # Fetch current resolution
@@ -11,29 +11,31 @@ while true; do
         echo "Resolution change detected: $current_resolution"
 
         # Run your commands here
-       
-        if [ "$current_resolution" = "$desired_resolution" ]; then
-    # If yes, run the yabai commands
-          yabai -m config top_padding 55
-          yabai -m config bottom_padding 34
-          yabai -m config left_padding 34
-          yabai -m config right_padding 34
-          yabai -m config window_gap 44
-          borders width=23
-          osascript ~/.config/toggleMenuBar.applescript
-          brew services start sketchybar 
 
-      else
-          echo "Resolution is not 3840 x 2160, skipping configuration changes."
-          yabai -m config top_padding 10
-          yabai -m config bottom_padding 10
-          yabai -m config left_padding 10
-          yabai -m config right_padding 10
-          yabai -m config window_gap 15
-          brew services stop sketchybar
-          osascript ~/.config/toggleMenuBar.applescript
-          borders width=13
-      fi
+        if [ "$current_resolution" = "$external_resolution" ]; then
+            # If yes, run the yabai commands for the external monitor
+            echo "Setting up for external monitor resolution."
+            yabai -m config top_padding 10
+            yabai -m config bottom_padding 10
+            yabai -m config left_padding 10
+            yabai -m config right_padding 10
+            yabai -m config window_gap 15
+            borders width=13
+            osascript ~/.config/toggleMenuBar.applescript
+            brew services stop sketchybar
+
+        else
+            # Run yabai commands for other resolutions
+            echo "Setting up for different resolution."
+            yabai -m config top_padding 55
+            yabai -m config bottom_padding 34
+            yabai -m config left_padding 34
+            yabai -m config right_padding 34
+            yabai -m config window_gap 44
+            borders width=23
+            osascript ~/.config/toggleMenuBar.applescript
+            brew services start sketchybar
+        fi
 
         # Update previous_resolution
         previous_resolution=$current_resolution

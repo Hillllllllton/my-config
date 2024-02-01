@@ -45,6 +45,7 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use {"github/copilot.vim"}
+  use "jellydn/CopilotChat.nvim"
   use "akinsho/toggleterm.nvim"
   use {
   'nvim-lualine/lualine.nvim',
@@ -69,6 +70,7 @@ return packer.startup(function(use)
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "folke/tokyonight.nvim"
   use "nordtheme/vim"
+  use "EdenEast/nightfox.nvim"
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -95,7 +97,7 @@ return packer.startup(function(use)
   use {"nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
       }
-  use "p00f/nvim-ts-rainbow"
+  use "HiPhish/nvim-ts-rainbow2"
   use "JoosepAlviste/nvim-ts-context-commentstring"
 
   -- git
@@ -110,6 +112,8 @@ return packer.startup(function(use)
             require("telescope").load_extension("lazygit")
         end,
     })
+  --ufo
+  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

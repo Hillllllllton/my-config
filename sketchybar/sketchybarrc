@@ -43,7 +43,7 @@ sketchybar --default icon.font="Hack Nerd Font:Bold:17.0"  \
 # https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 # to indicate active and available mission control spaces
 brackets=(
-  background.color=0xff5E81AC
+  background.color=0xff4C566A
   background.height=35
   background.corner_radius=10
   background.border_color=0xff8FBCBB
@@ -59,10 +59,12 @@ do
   sketchybar --add space space.$sid left                                 \
              --set space.$sid associated_space=$sid                      \
                               icon=${SPACE_ICONS[i]}                     \
-                              background.color=0xff8FBCBB                \
+                              icon.padding_left=5                       \
+                              icon.padding_right=5                      \
+                              background.border_color=0xff8FBCBB         \
                               background.corner_radius=5                 \
+                              background.border_width=5                  \
                               background.height=20                       \
-                              background.drawing=off                     \
                               label.drawing=off                          \
                               script="$PLUGIN_DIR/space.sh"              \
                               click_script="yabai -m space --focus $sid"
@@ -86,8 +88,8 @@ sketchybar --add item space_separator left                         \
 sketchybar --add bracket left_menu space_separator front_app \
            --set left_menu "${brackets[@]}"                  \
            
-sketchybar --add bracket space_menu space.$sid     \
-           --set space_menu "${brackets[@]}" 
+sketchybar --add bracket space_menu '/space\..*/'     \
+           --set space_menu "${brackets[@]}"          
 
 ##### Adding Right Items #####
 # In the same way as the left items we can add items to the right side.
@@ -120,7 +122,18 @@ sketchybar --add item clock right                              \
            --add item battery right                            \
            --set battery script="$PLUGIN_DIR/battery.sh"       \
                          update_freq=120                       \
-           --subscribe battery system_woke power_source_change
+           --subscribe battery system_woke power_source_change 
+
+sketchybar --add event input_change 'AppleSelectedInputSourcesChangedNotification' \
+           --add item input right\
+           --set input script="$PLUGIN_DIR/input.sh" \
+              icon=􀇳 \
+              icon.font="Hack Nerd Font:Black:17.0"      \
+              label.font="$FONT:16.0"      \
+              padding_left=2 \
+              label.y_offset=1 \
+              icon.y_offset=1 \
+          --subscribe input input_change
 
 sketchybar  --add item mic right \
 sketchybar  --set mic update_freq=3 \
@@ -129,6 +142,8 @@ sketchybar  --set mic update_freq=3 \
 
 sketchybar --add bracket clock_bracket clock  \
            --set clock_bracket "${brackets[@]}" 
+sketchybar --add bracket input_bracket input mic \
+           --set input_bracket "${brackets[@]}"
 
 sketchybar --add bracket status wifi volume battery \
            --set status "${brackets[@]}"             
