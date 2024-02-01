@@ -55,8 +55,6 @@ keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
--- press jk fast to enter  
-keymap("v", "jk", "<ESC>", opts)
 
 -- Visual Block --
 -- Move text up and down

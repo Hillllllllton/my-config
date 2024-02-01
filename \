@@ -17,8 +17,6 @@ sketchybar --bar height=40        \
                  color=0x00000000 \
                  border_color=0xffd08770 \
                  sticky=on       \
-                 margin=10       \
-                 y_offset=4     \
                  padding_left=25  \
                  padding_right=25 
 
@@ -42,14 +40,6 @@ sketchybar --default icon.font="Hack Nerd Font:Bold:17.0"  \
 # Now we add some mission control spaces:
 # https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 # to indicate active and available mission control spaces
-brackets=(
-  background.color=0xff5E81AC
-  background.height=35
-  background.corner_radius=10
-  background.border_color=0xff8FBCBB
-  background.border_width=5
-
-)
 
 SPACE_ICONS=("" "" "󰙯" "󰓓" "󰀶" "6" "7" "8" "9" "10")
 
@@ -83,12 +73,6 @@ sketchybar --add item space_separator left                         \
                                  icon.drawing=off                  \
            --subscribe front_app front_app_switched
 
-sketchybar --add bracket left_menu space_separator front_app \
-           --set left_menu "${brackets[@]}"                  \
-           
-sketchybar --add bracket space_menu space.$sid     \
-           --set space_menu "${brackets[@]}" 
-
 ##### Adding Right Items #####
 # In the same way as the left items we can add items to the right side.
 # Additional position (e.g. center) are available, see:
@@ -103,13 +87,12 @@ sketchybar --add bracket space_menu space.$sid     \
 sketchybar --add item clock right                              \
            --set clock   update_freq=10                        \
                          icon=                                \
-                         padding_left=10                        \
+                         podding_left=20                        \
                          script="$PLUGIN_DIR/clock.sh"         \
                                                                \
            --add item wifi right                               \
            --set wifi    script="$PLUGIN_DIR/wifi.sh"          \
                          icon=                                \
-                         padding_right=20                      \
                          update_freq=5                         \
            --subscribe wifi wifi_change                        \
                                                                \
@@ -122,11 +105,14 @@ sketchybar --add item clock right                              \
                          update_freq=120                       \
            --subscribe battery system_woke power_source_change
 
-sketchybar  --add item mic right \
-sketchybar  --set mic update_freq=3 \
-              --set mic script="~/.config/sketchybar/plugins/mic.sh" \
-              --set mic click_script="~/.config/sketchybar/plugins/mic_click.sh"
+brackets=(
+  background.color=0xff5E81AC
+  background.height=35
+  background.corner_radius=10
+  background.border_color=0xff8FBCBB
+  background.border_width=5
 
+)
 sketchybar --add bracket clock_bracket clock  \
            --set clock_bracket "${brackets[@]}" 
 
