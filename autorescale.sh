@@ -27,7 +27,7 @@ while true; do
         else
             # Run yabai commands for other resolutions
             echo "Setting up for different resolution."
-            yabai -m config top_padding 55
+            yabai -m config top_padding 60
             yabai -m config bottom_padding 34
             yabai -m config left_padding 34
             yabai -m config right_padding 34

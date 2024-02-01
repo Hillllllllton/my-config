@@ -7,6 +7,37 @@ local keymap = vim.keymap
 
 local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 
+local whichkey = require("which-key")
+local opts = {buffer = bufnr}
+  whichkey.register({
+      d = {
+        name = "diagnostics",
+        d = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show line diagnostics" },
+        l = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set loclist" },
+        n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "goto next" },
+        p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "goto prev" },
+        q = { "<cmd>lua vim.lsp.diagnostic.set_qflist()<CR>", "set qflist" },
+        w = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set loclist" },
+      },
+      l = {
+        name = "lsp",
+        a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "code action" },
+        d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "definition" },
+        D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "declaration" },
+        f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "formatting" },
+        h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "hover" },
+        i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "implementation" },
+        k = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "signature help" },
+        l = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show line diagnostics" },
+        n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "goto next" },
+        p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "goto prev" },
+        q = { "<cmd>lua vim.lsp.diagnostic.set_qflist()<CR>", "set qflist" },
+        r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
+        s = { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "document symbol" },
+        S = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "workspace symbol" },
+        t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "type definition" }
+      },
+    },{prefix = "<leader>"})
 
 local on_attach = function(clent, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr}
@@ -58,8 +89,8 @@ lspconfig["yamlls"].setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
-lspconfig["clangd"].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
+-- lspconfig["clang"].setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- })
 

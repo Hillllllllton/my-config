@@ -250,6 +250,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/hillton/.local/share/nvim/site/pack/packer/start/vim",
     url = "https://github.com/nordtheme/vim"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/Users/hillton/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 
