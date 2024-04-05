@@ -70,6 +70,14 @@ return packer.startup(function(use)
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "folke/tokyonight.nvim"
   use "nordtheme/vim"
+  use { "ellisonleao/gruvbox.nvim" }
+  use({
+  "neanias/everforest-nvim",
+  -- Optional; default configuration will be used if setup isn't called.
+  config = function()
+    require("everforest").setup()
+  end,
+})
   use "EdenEast/nightfox.nvim"
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -78,6 +86,11 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
+  use {"folke/noice.nvim",
+      requires = {"MunifTanjim/nui.nvim",
+                 "rcarriga/nvim-notify",     
+    },
+  }
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -85,12 +98,15 @@ return packer.startup(function(use)
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/mason.nvim" -- simple to use language server installer
-  use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
-
+  use {"williamboman/mason.nvim", -- simple to use language server installer
+   requires= { "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
+              "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
+  }
+  use "stevearc/conform.nvim"
   -- Telescope
   use {"nvim-telescope/telescope.nvim",
-        dependencies = {"nvim-lua/plenary.nvim" }
+        requires = {"nvim-lua/plenary.nvim" }
       }
 
   -- Treesitter
@@ -117,6 +133,9 @@ return packer.startup(function(use)
 
   -- which-key
   use "folke/which-key.nvim"
+  
+  -- nvim-tmux-navigation
+  use "christoomey/vim-tmux-navigator"
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

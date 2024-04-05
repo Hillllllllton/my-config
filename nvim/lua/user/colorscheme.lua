@@ -5,4 +5,4 @@
 --   return
 -- end
 --Lua:
-vim.cmd[[colorscheme nord]]
+vim.cmd[[colorscheme everforest]]

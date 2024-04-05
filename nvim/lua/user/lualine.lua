@@ -1,6 +1,6 @@
 require('lualine').setup {
   options = {
-    theme = 'nord'
+    theme = 'everforest'
   }
 }
 require"nvim-web-devicons".setup {

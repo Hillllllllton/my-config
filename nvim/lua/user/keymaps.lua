@@ -20,10 +20,10 @@ vim.g.maplocalleader = " "
 
 -- Normal --
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- keymap("n", "<C-h>", "<C-w>h", opts)
+-- keymap("n", "<C-j>", "<C-w>j", opts)
+-- keymap("n", "<C-k>", "<C-w>k", opts)
+-- keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- keymap("n", "<leader>e", ":Lex 30<cr>", opts)
 
@@ -65,17 +65,18 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Terminal --
 -- Better terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
+-- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+-- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+-- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+-- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+--
 -- keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
 -- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 -- keymap("n", "<leader>t", "<cmd>Telescope live_grep<cr>", opts)
 -- keymap("n", "<leader>b", "<cmd>Telescope buffers<cr>", opts)
 
 keymap("n", "<leader>e", ":NvimTreeFindFileToggle<cr>", opts)
+keymap("n", "<A-t>", "<cmd>ToggleTerm<cr>", opts)
 
 -- keymap("n", "<leader>gg", ":LazyGit<cr>", opts)
 -- keymap("n", "<leader>tl", ":Telescope lazygit<cr>", opts)
@@ -110,10 +111,10 @@ whichkey.register({
     h = { "<cmd>ToggleTerm<cr>", "Toggle Terminal" },
   },
 },{prefix = "<leader>"})
-whichkey.register({
-  --better terminal navigation
-  ["<C-h>"] = { "<C-\\><C-N><C-w>h", "Terminal Left" },
-  ["<C-j>"] = { "<C-\\><C-N><C-w>j", "Terminal Down" },
-  ["<C-k>"] = { "<C-\\><C-N><C-w>k", "Terminal Up" },
-  ["<C-l>"] = { "<C-\\><C-N><C-w>l", "Terminal Right" },
-})
+-- whichkey.register({
+--   --better terminal navigation
+--   ["<C-h>"] = { "<C-\\><C-N><C-w>h", "Terminal Left" },
+--   ["<C-j>"] = { "<C-\\><C-N><C-w>j", "Terminal Down" },
+--   ["<C-k>"] = { "<C-\\><C-N><C-w>k", "Terminal Up" },
+--   ["<C-l>"] = { "<C-\\><C-N><C-w>l", "Terminal Right" },
+-- })
