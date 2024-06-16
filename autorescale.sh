@@ -32,7 +32,7 @@ while true; do
             yabai -m config left_padding 34
             yabai -m config right_padding 34
             yabai -m config window_gap 44
-            borders width=23
+            borders width=16
             osascript ~/.config/toggleMenuBar.applescript
             brew services start sketchybar
         fi
