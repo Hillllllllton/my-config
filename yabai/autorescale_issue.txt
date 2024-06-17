@@ -1,0 +1,65 @@
+I was looking for a way to automatically rescale the padding when entering clamshell mode. Unfortunately, I couldn't find this feature in Yabai, so I created an alternative method (thx gpt). If Yabai officially supports this function, please let me know!
+
+
+### 1. Check the external monitor resolution
+ You can check the resolution using either the Yabai command or a shell command.
+
+a. Using Yabai command:
+
+    yabai -m query  --displays 
+
+b. Using Shell command:
+
+    system_profiler SPDisplaysDataType 
+
+### 2. Create an Auto Rescale Script
+Make sure to change the desired_resolution to match your external monitor's resolution. The format should be "width x height", and the spacing must be exactly the same.
+
+**`autorescale.sh`**
+```sh
+previous_resolution=""
+desired_resolution="3840 x 2160"    # Change to your external monitor's resolution
+
+while true; do
+    # Fetch current resolution
+    current_resolution=$(system_profiler SPDisplaysDataType | grep Resolution | awk '{print $2, $3, $4}')
+
+    # Check if the resolution has changed
+    if [ "$current_resolution" != "$previous_resolution" ]; then
+        echo "Resolution change detected: $current_resolution"
+        if [ "$current_resolution" = "$desired_resolution" ]; then
+            # If yes, run the Yabai commands
+            yabai -m config top_padding 34 ....
+        else
+            echo "Resolution is not 3840 x 2160, skipping configuration changes."
+            yabai -m config top_padding 5 ....
+        fi
+
+        # Update previous_resolution
+        previous_resolution=$current_resolution
+    fi
+
+    # Wait a bit before checking again
+    sleep 5
+done
+
+```     
+
+
+### 2.  Run the Script in the Background
+ Use the nohup command to run the script in the background. The script checks for resolution changes every 5 seconds.
+
+    nohup ./PATH/autorescale.sh &
+
+### 3. Update the script
+To update the script, first find the PID of autorescale.sh:
+
+    ps aux | grep autorescale.sh
+
+Then, kill the process (for example):
+
+    kill 25632
+
+After the process has been terminated, return to step 2 to restart the script.
+
+

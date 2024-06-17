@@ -45,6 +45,7 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use {"github/copilot.vim"}
+  use "jellydn/CopilotChat.nvim"
   use "akinsho/toggleterm.nvim"
   use {
   'nvim-lualine/lualine.nvim',
@@ -69,6 +70,15 @@ return packer.startup(function(use)
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "folke/tokyonight.nvim"
   use "nordtheme/vim"
+  use { "ellisonleao/gruvbox.nvim" }
+  use({
+  "neanias/everforest-nvim",
+  -- Optional; default configuration will be used if setup isn't called.
+  config = function()
+    require("everforest").setup()
+  end,
+})
+  use "EdenEast/nightfox.nvim"
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -76,6 +86,11 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
+  use {"folke/noice.nvim",
+      requires = {"MunifTanjim/nui.nvim",
+                 "rcarriga/nvim-notify",     
+    },
+  }
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -83,23 +98,44 @@ return packer.startup(function(use)
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/mason.nvim" -- simple to use language server installer
-  use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
-
+  use {"williamboman/mason.nvim", -- simple to use language server installer
+   requires= { "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
+              "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
+  }
+  use "stevearc/conform.nvim"
   -- Telescope
   use {"nvim-telescope/telescope.nvim",
-        dependencies = {"nvim-lua/plenary.nvim" }
+        requires = {"nvim-lua/plenary.nvim" }
       }
 
   -- Treesitter
   use {"nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
       }
-  use "p00f/nvim-ts-rainbow"
+  use "HiPhish/nvim-ts-rainbow2"
   use "JoosepAlviste/nvim-ts-context-commentstring"
 
   -- git
   use "lewis6991/gitsigns.nvim"
+  use({
+        "kdheepak/lazygit.nvim",
+        requires = {
+            "nvim-telescope/telescope.nvim",
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("telescope").load_extension("lazygit")
+        end,
+    })
+  --ufo
+  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+
+  -- which-key
+  use "folke/which-key.nvim"
+  
+  -- nvim-tmux-navigation
+  use "christoomey/vim-tmux-navigator"
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
